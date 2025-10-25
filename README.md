@@ -1,6 +1,6 @@
-# Calculation App
+# Calculation Material DN-SDN-EVO-40
 
-A Thai materials cost calculator for crafting systems with profile management.
+A comprehensive Thai materials cost calculator for DN-SDN-EVO-40 crafting systems with advanced profile management.
 
 ## Features
 
@@ -13,7 +13,7 @@ A Thai materials cost calculator for crafting systems with profile management.
 
 ## Live Demo
 
-Visit: [https://yourusername.github.io/cal-dn](https://yourusername.github.io/cal-dn)
+Visit: [https://prakasitz.github.io/Calculation-Material-DN-SDN-EVO-40](https://prakasitz.github.io/Calculation-Material-DN-SDN-EVO-40)
 
 ## Local Development
 
@@ -38,10 +38,24 @@ Visit: [https://yourusername.github.io/cal-dn](https://yourusername.github.io/ca
 
 ## GitHub Pages Deployment
 
-This app is designed to work with GitHub Pages. Simply push to your repository and enable GitHub Pages in settings.
+This app is designed to work with GitHub Pages. 
+
+### Quick Deploy
+Run `deploy.bat` to automatically deploy to GitHub Pages.
+
+### Manual Deploy
+1. Push changes: `git push origin main`
+2. Enable GitHub Pages at: [Repository Settings](https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings/pages)
+
+## Repository Information
+
+- **Repository**: [prakasitz/Calculation-Material-DN-SDN-EVO-40](https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40)
+- **Live Demo**: [https://prakasitz.github.io/Calculation-Material-DN-SDN-EVO-40](https://prakasitz.github.io/Calculation-Material-DN-SDN-EVO-40)
+- **Game**: Dragon Nest SDN EVO 40
 
 ## Browser Compatibility
 
 - Modern browsers with ES6+ support
 - Local storage for temporary data
 - JSON file handling for profile persistence
+- GitHub Pages optimized

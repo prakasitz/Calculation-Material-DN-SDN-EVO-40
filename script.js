@@ -107,7 +107,9 @@
   let have = JSON.parse(localStorage.getItem("bcrm_have")||"{}"); // จำนวนที่มีแล้วต่อวัตถุดิบ
   let profiles = {}; // บันทึกโปรไฟล์ต่าง ๆ (จะโหลดจาก JSON)
   let currentProfile = ""; // โปรไฟล์ปัจจุบัน (จะโหลดจาก JSON)
-  let isGitHubPages = window.location.hostname.includes('github.io') || window.location.hostname.includes('githubusercontent.com');
+  let isGitHubPages = window.location.hostname.includes('github.io') || 
+                      window.location.hostname.includes('githubusercontent.com') ||
+                      window.location.href.includes('prakasitz.github.io/Calculation-Material-DN-SDN-EVO-40');
 
   async function loadItems(){
     try {
