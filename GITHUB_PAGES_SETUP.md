@@ -1,13 +1,19 @@
 # GitHub Pages Setup Guide
 
-## 🔧 Fix Deployment Issues
+## 🔧 Fix Deployment Issues - IMPORTANT ORDER
 
-### Step 1: Enable GitHub Pages
+### Step 1: Enable GitHub Pages FIRST (Required!)
 1. Go to your repository: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40
 2. Click on **Settings** tab
 3. Scroll down to **Pages** section in the left sidebar
-4. Under **Source**, select **"GitHub Actions"** (not "Deploy from a branch")
-5. Click **Save**
+4. Under **Source**, select **"Deploy from a branch"** FIRST
+5. Select **"main"** branch and **"/ (root)"** folder
+6. Click **Save**
+7. WAIT for GitHub to enable Pages (you'll see a green checkmark)
+8. Then CHANGE Source back to **"GitHub Actions"**
+9. Click **Save** again
+
+⚠️ **CRITICAL**: You MUST enable Pages with "Deploy from branch" first, then switch to "GitHub Actions"!
 
 ### Step 2: Check Repository Permissions
 1. Go to **Settings** → **Actions** → **General**

@@ -9,11 +9,16 @@ echo ❌ The error you saw indicates a permissions issue with GitHub Actions.
 echo.
 echo 🛠️  Manual fixes needed (do these in your browser):
 echo.
-echo 1️⃣  Go to: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings/pages
-echo     - Under "Source", select "GitHub Actions" (not "Deploy from a branch")
-echo     - Click Save
+echo 1️⃣  FIRST - Enable GitHub Pages:
+echo     Go to: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings/pages
+echo     - Under "Source", select "Deploy from a branch"
+echo     - Choose "main" branch and "/ (root)" folder  
+echo     - Click Save and WAIT for it to be enabled
+echo     - Then CHANGE back to "GitHub Actions"
+echo     - Click Save again
 echo.
-echo 2️⃣  Go to: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings/actions
+echo 2️⃣  Fix Actions Permissions:
+echo     Go to: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings/actions
 echo     - Under "Workflow permissions", select "Read and write permissions"
 echo     - Check "Allow GitHub Actions to create and approve pull requests"
 echo     - Click Save
