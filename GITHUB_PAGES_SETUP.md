@@ -1,19 +1,31 @@
 # GitHub Pages Setup Guide
 
-## 🔧 Fix Deployment Issues - IMPORTANT ORDER
+## � FIXING 404 NOT FOUND ERROR
 
-### Step 1: Enable GitHub Pages FIRST (Required!)
-1. Go to your repository: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40
-2. Click on **Settings** tab
-3. Scroll down to **Pages** section in the left sidebar
-4. Under **Source**, select **"Deploy from a branch"** FIRST
-5. Select **"main"** branch and **"/ (root)"** folder
-6. Click **Save**
-7. WAIT for GitHub to enable Pages (you'll see a green checkmark)
-8. Then CHANGE Source back to **"GitHub Actions"**
-9. Click **Save** again
+Your site https://prakasitz.github.io/Calculation-Material-DN-SDN-EVO-40 shows 404 because:
 
-⚠️ **CRITICAL**: You MUST enable Pages with "Deploy from branch" first, then switch to "GitHub Actions"!
+### ✅ Step 1: Check Repository Visibility
+1. Go to: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings
+2. Scroll to bottom "Danger Zone"
+3. If repository is PRIVATE, click "Change repository visibility" → Make PUBLIC
+4. **GitHub Pages requires PUBLIC repositories for free accounts**
+
+### ✅ Step 2: Push Your Code
+1. Run `diagnose-pages.bat` to push all files
+2. Make sure `index.html` exists in your main branch
+3. Check: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40
+
+### ✅ Step 3: Enable GitHub Pages
+1. Go to: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/settings/pages
+2. Under **Source**, select **"Deploy from a branch"**
+3. Choose **"main"** branch and **"/ (root)"** folder
+4. Click **Save**
+5. **WAIT 5-10 minutes** for first deployment
+
+### ✅ Step 4: Verify Deployment
+- Check status: https://github.com/prakasitz/Calculation-Material-DN-SDN-EVO-40/deployments
+- Look for "github-pages" environment
+- Green checkmark = successful deployment
 
 ### Step 2: Check Repository Permissions
 1. Go to **Settings** → **Actions** → **General**
