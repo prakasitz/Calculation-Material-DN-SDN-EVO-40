@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>คำนวณของที่ต้องใช้ + ราคา G → บาท</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Loading Modal -->
+  <div id="loadingModal" class="loading-modal">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <h2>กำลังโหลดระบบคำนวณ...</h2>
+      <div class="loading-steps">
+        <div class="loading-step" id="step1">🔧 กำลังโหลดการตั้งค่า...</div>
+        <div class="loading-step" id="step2">📁 กำลังโหลดโปรไฟล์...</div>
+        <div class="loading-step" id="step3">📊 กำลังเตรียมข้อมูล...</div>
+        <div class="loading-step" id="step4">✨ กำลังสร้างอินเตอร์เฟซ...</div>
+      </div>
+      <div class="loading-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">0%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h1>คำนวณวัตถุดิบ & ค่าใช้จ่าย (G → บาท)</h1>
+    <div class="note">ติ๊ก “มีแล้ว” เพื่อตัดออกจากยอดรวม | ปรับราคา/หน่วยและเรทเงินได้ตามใจ</div>
+
+    <!-- Profile System -->
+    <div class="card">
+      <h2>📁 จัดการโปรไฟล์</h2>
+      <div class="note">บันทึกและโหลดการตั้งค่าต่าง ๆ (ราคา, เรทเงิน, วัตถุดิบที่มี)</div>
+      <div id="githubPagesNotice" class="note" style="background: #1e40af; color: #bfdbfe; padding: 8px 12px; border-radius: 6px; margin: 8px 0; display: none;">
+        🌐 GitHub Pages: โปรไฟล์จะบันทึกใน Browser Storage และดาวน์โหลดเป็นไฟล์สำรอง
+      </div>
+      <div class="flex" style="margin-bottom:12px;">
+        <div class="pill">
+          <span>โปรไฟล์ปัจจุบัน:</span>
+          <select id="profileSelect" style="margin-left:8px; padding:4px 8px; border-radius:6px; background:#0b1220; color:#e5e7eb; border:1px solid #374151;">
+            <option value="">-- เลือกโปรไฟล์ --</option>
+          </select>
+          <span id="profileStatus" class="badge" style="margin-left:8px; display:none;">🔄 กำลังบันทึก...</span>
+        </div>
+        <div class="pill">
+          <input type="text" id="newProfileName" placeholder="ชื่อโปรไฟล์ใหม่" style="padding:4px 8px; border-radius:6px; background:#0b1220; color:#e5e7eb; border:1px solid #374151; width:150px;">
+          <button id="saveProfileBtn">บันทึก</button>
+        </div>
+        <div class="pill">
+          <button id="loadProfileBtn">โหลด</button>
+          <button id="deleteProfileBtn" class="danger">ลบ</button>
+        </div>
+        <div class="pill">
+          <button id="exportProfilesBtn">📤 ส่งออก</button>
+          <button id="importProfilesBtn">📥 นำเข้า</button>
+          <input type="file" id="importFileInput" accept=".json" style="display:none;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ราคาและเรท -->
+    <div class="card">
+      <h2>ตั้งราคา/หน่วย และเรทเงิน</h2>
+      <div class="grid cols-6" id="priceInputs"></div>
+      <div class="flex" style="margin-top:12px;">
+        <div class="pill">
+          <span>อัตราแลกเปลี่ยน:</span>
+          <label>1 G = <input type="number" step="0.0001" id="rateTHB" value="0.21" style="width:110px" /> บาท</label>
+        </div>
+        <div class="pill">
+          <label><input type="checkbox" id="hideOwned" /> ซ่อนรายการที่ “มีแล้ว”</label>
+        </div>
+        <div class="pill"><button id="resetBtn">รีเซ็ตค่าเริ่มต้น</button></div>
+        <div class="pill"><button id="clearOwnedBtn" class="danger">ล้างเช็ก “มีแล้ว”</button></div>
+      </div>
+    </div>
+
+    <!-- ส่วนใหม่: วัตถุดิบที่มีแล้ว -->
+    <div class="card">
+      <h2>📦 วัตถุดิบที่มีแล้ว</h2>
+      <div class="note">กรอกจำนวนที่มีในมือ (หน่วย) ระบบจะหักออกจากยอดรวมและคำนวณส่วนลดให้ทันที</div>
+      <div class="grid cols-6" id="haveInputs"></div>
+      <div id="discountSummary" class="summary-box"></div>
+    </div>
+
+    <!-- ตารางแจกแจง -->
+    <div class="card">
+      <h2>หน้าแจกแจงของที่ต้องใช้</h2>
+      <div class="table-wrapper">
+        <table id="itemsTable">
+          <thead>
+            <tr>
+              <th>รายการ</th><th>มีแล้ว</th>
+              <th>เขียว</th><th>ม่วง</th><th>ขาว</th><th>EL</th><th>DH</th><th>DHF</th>
+              <th>Fee (G)</th><th>รวม/ชิ้น (G)</th><th>รวม/ชิ้น (บาท)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr class="totals">
+              <td>รวม “วัตถุดิบต้องซื้อ” (หน่วย)</td><td></td>
+              <td id="sum_units_เขียว"></td><td id="sum_units_ม่วง"></td><td id="sum_units_ขาว"></td>
+              <td id="sum_units_EL"></td><td id="sum_units_DH"></td><td id="sum_units_DHF"></td>
+              <td>—</td><td>—</td><td>—</td>
+            </tr>
+            <tr>
+              <td class="muted">คิดเป็น G ของวัตถุดิบ</td><td></td><td colspan="6"></td>
+              <td>—</td><td id="sum_cost_G"></td><td id="sum_cost_THB"></td>
+            </tr>
+            <tr>
+              <td class="muted">รวม G ที่ค่าธรรมเนียมตามสูตร</td><td></td><td colspan="6"></td>
+              <td id="sum_gdirect"></td><td>—</td><td id="sum_gdirect_THB"></td>
+            </tr>
+            <tr class="totals">
+              <td>รวมทั้งหมด (วัตถุดิบ + Fee)</td><td></td><td colspan="6"></td>
+              <td>—</td><td id="grand_G"></td><td id="grand_THB"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- สรุปท้าย -->
+    <div class="sticky-footer">
+      <div class="flex">
+        <div class="pill"><strong>รวมทั้งหมด:</strong> <span id="grandGBadge" class="badge">— G</span></div>
+        <div class="pill"><strong>คิดเป็นเงิน:</strong> <span id="grandTHBBadge" class="badge blue">— บาท</span></div>
+      </div>
+    </div>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
